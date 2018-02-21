@@ -1,0 +1,90 @@
+{% extends 'home.html' %}
+{% load staticfiles %}
+{#{% load widget_tweaks %}#}
+{% block content %}
+  {{ block.super }}
+  <div class="row">
+    <div class="col-lg-4">
+      <div  align="center"> <img alt="User Pic" src="https://x1.xingassets.com/assets/frontend_minified/img/users/nobody_m.original.jpg" style="width:80%;" id="profile-image1" class="img-circle img-responsive">
+        <input id="profile-image-upload" class="hidden" type="file">
+      </div>
+      <br>
+    </div>
+    <div class="col-lg-offset-1 col-lg-7">
+      <form action="" method="post">
+        {% csrf_token %}
+
+          <div class="row">
+            <div class="col-lg-6">
+{#              {{ field.errors }}#}<span style="color: red">{{ error_messege }}</span>
+              <div class="form-group ">
+{#                {{ field.label_tag }}#}
+{#                {{ field }}#}
+
+  <b>User Name:</b><br>
+  <input class="form-control"required type="text" name="username" value="{{ user.username }}"><br>
+  <b>First name:</b><br>
+  <input class="form-control"required type="text" name="first_name"value="{{ user.first_name }}"> <br>
+  <b>Last name:</b><br>
+  <input class="form-control"required type="text" name="last_name"value="{{ user.last_name }}"><br>
+  <b>Email:</b><br>
+  <input class="form-control"required type="text" name="email"value="{{ user.email }}"><br>
+  <b>Phone:</b><br>
+  <input class="form-control" required type="text" name="phone"value="{{ profile.phone }}"><br>
+  <b>Address:</b><br>
+  <input class="form-control" type="text" name="address"value="{{ profile.address }}"><br>
+  <b>Gender:</b><br>
+					<select name="sex" id="id_sex" class="form-control">
+						<option value="0" {% if profile.sex == '0'%}selected{% endif %}>Female</option>
+						<option value="1" {% if profile.sex == '1'%}selected{% endif %}>Male</option>
+						<option value="2"{% if profile.sex == '2'%}selected{% endif %}>Both</option>
+					</select>
+                  <br>
+{#  <b>Birthday:</b><br>#}
+{#  <input  class="form-control"id='datetimepicker1' type="date" name="dob"value="{{ profile.dob }}">#}
+{#                  		<span  class="input-group-addon">#}
+{#	                        <span class="glyphicon glyphicon-calendar"></span>#}
+{#	                    </span>#}
+
+              <div class="form-group">
+					<label for="id_dob">Date of birth:</label><br>
+					<div class='input-group date' id='datetimepicker1'>
+						<input type="text" name="dob" required class="form-control" id="id_dob" value="{{ profile.dob |safe }}"/>
+						<span class="input-group-addon">
+	                        <span id="calender" class="glyphicon glyphicon-calendar"></span>
+	                    </span>
+	                </div>
+				</div>
+
+
+              </div>
+            </div>
+          </div>
+
+        <input type="submit" class="btn btn-success" value="Update" />
+      </form>
+      <br>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block js_content %}
+  <script type="text/javascript">
+      $(function () {
+
+{#        $('#id_dob').datetimepicker({#}
+{#          format : 'YYYY-MM-DD'#}
+{#        });#}
+
+          document.getElementById("calender").onclick = function() {
+                 $('#id_dob').datetimepicker({
+          format : 'YYYY-MM-DD'
+        });
+      };
+      });
+
+
+
+    </script>
+{% endblock%}

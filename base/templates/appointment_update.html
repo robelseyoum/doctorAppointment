@@ -1,0 +1,81 @@
+{% extends 'home.html' %}
+{% load staticfiles %}
+
+
+{% block content %}
+{{ block.super}}
+<form action="{% url 'base:appointment_update' %}" method="post">
+    {% csrf_token %}
+    <div class="container">
+	    <div class="row">
+	        <div class='col-xs-12 col-sm-4'>
+	        	<b>Select Doctor:</b>
+	            <div class="form-group">
+	                <div class='input-group'>
+	                    <select name="doctor_user_id" style="width: 350px" required>
+
+                 {% for doctor in doctorList %}
+                      <option {% if previous_appoinment_data.doctor_id == doctor.doctor_id %}selected{% endif %} value="{{ doctor.id }}">{{ doctor.username }}( {{ doctor.category_name }} )</option>
+                 {% endfor %}
+             </select>
+	                </div>
+	            </div>
+	        </div>
+
+
+
+
+	    </div>
+	    <div class="row">
+	        <div class='col-xs-12 col-sm-4'>
+
+            <b>Appointment:</b>
+	            <div class="form-group">
+					<div class='input-group date' id='datetimepicker1'>
+						<input value="{{ previous_appoinment_data.appointment |safe }}" type="text" name="appointment_update_date" required class="form-control" id="id_app" />
+						<span class="input-group-addon">
+	                        <span id="calender" class="glyphicon glyphicon-calendar"></span>
+	                    </span>
+	                </div>
+	            </div>
+	            <input  onclick="alertUpdate()" type="submit" value='{% if request.resolver_match.url_name == "appointment_book" %}Create{% else %}Update{% endif %}' class="btn btn-default" />
+	        </div>
+	    </div>
+
+  	</div>
+</form>
+{% endblock %}
+
+{% block js_content %}
+	<script type="text/javascript">
+
+
+{#            $(function () {#}
+{#                var date = new Date();#}
+{#			date.setDate(date.getDate());#}
+{##}
+{#                $('#datetimepicker1').datetimepicker({#}
+{#                 format: 'YYYY-MM-DD HH:mm:ss',#}
+{#                    minDate: date,#}
+{#           		});#}
+{#            });#}
+
+
+
+
+
+          document.getElementById("calender").onclick = function() {
+              var date=new Date();
+              date.setDate(date.getDate());
+                 $('#id_app').datetimepicker({
+          format : 'YYYY-MM-DD HH:mm:ss',
+                     minDate: date,
+
+        });
+      };
+
+function alertUpdate() {
+    alert("Appoinment Successfully Updated.!");
+}
+    </script>
+{% endblock%}

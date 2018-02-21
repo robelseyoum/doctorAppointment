@@ -1,0 +1,30 @@
+{% extends 'home.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{{ block.super}}
+    {% if appointment_data %}
+        <MARQUEE style="color: red"> {{ alert_message }}</MARQUEE>
+{% for appointment in appointment_data %}
+<div class="alert  alert-info " role="alert">Appointment id: {{ appointment.appointment_id }}<br><br>
+	Creation date: {{ appointment.creation_date }} ***
+	Last change: {{ appointment.last_change }}<br><br>
+
+		Doctor: {{ appointment.doctor_name}}<br>
+		<a class="btn btn-default pull-right" href="{% url 'base:appointment_update'  %}" role="button">Reschedule</a>
+
+	Appointment date: {{ appointment.appointment_date}}
+	</div> 
+{% endfor %}
+
+
+       {% else %}
+      <b>There are no Appointment available.</b>
+    {% endif %}
+
+
+
+
+
+
+{% endblock %}

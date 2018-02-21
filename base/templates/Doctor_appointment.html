@@ -1,0 +1,18 @@
+{% extends 'home.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{{ block.super}}
+{% for appointment in appointment_data %}
+<div class="alert  alert-info " role="alert">Appointment id: {{ appointment.appointment_id }}<br><br>
+	Creation date: {{ appointment.creation_date }} ***
+	Last change: {{ appointment.last_change }}<br><br>
+
+		Patient: {{ appointment.patient_name}}<br>
+		<a class="btn btn-default pull-right" href="{% url 'base:treatment' appointment.appointment_id %}" role="button">Add treatment</a>
+
+	Appointment date: {{ appointment.appointment_date}}
+	</div> 
+{% endfor %}
+
+{% endblock %}

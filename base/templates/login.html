@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3>Log in to Doctor Appointment Booking System </h3>
+    {% if message %}
+      <p style="color: red">{{ message }}</p>
+    {% endif %}
+    <div class="col-lg-4">
+      <form method="post"  action="{% url 'base:login' %}">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <label for="id_username">Username</label>
+        <input type="text" name="username"  class="form-control" autofocus="" required="" id="id_username" maxlength="254">
+      </div>
+      <div class="form-group">
+        <label for="id_password">Password</label>
+       <input type="password" class="form-control" name="password" required="" id="id_password">
+      </div>
+      <button type="submit" class="btn btn-primary ml-2">Submit</button>
+      <a href="{% url 'base:registration' %}"class="btn btn-primary ml-2" >Sign up</a>
+    </form>
+    </div>
+{% endblock %}

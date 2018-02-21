@@ -1,0 +1,96 @@
+{% extends 'home.html' %}
+{% load staticfiles %}
+{#{% load widget_tweaks %}#}
+
+{% block content %}
+{{ block.super}}
+<form action="{% url 'base:appointment_book' %}" method="post">
+    {% csrf_token %}
+    <div class="container">
+	    <div class="row">
+	        <div class='col-xs-12 col-sm-4'>
+	        	<b>Select Doctor:</b>
+	            <div class="form-group">
+	                <div class='input-group'>
+	                    <select name="doctor_id" style="width: 350px" required>
+              <option value="">Please Select a doctor....</option>
+                 {% for doctor in doctorList %}
+                      <option value="{{ doctor.id }}">{{ doctor.username }}( {{ doctor.category_name }} )</option>
+                 {% endfor %}
+             </select>
+	                </div>
+	            </div>
+	        </div>
+
+
+
+
+	    </div>
+	    <div class="row">
+	        <div class='col-xs-12 col-sm-4'>
+{#	        	{{form.appointment.label}}:#}
+            <b>Appointment:</b>
+	            <div class="form-group">
+					<div class='input-group date' id='datetimepicker1'>
+						<input type="text" name="appointment_booking_date" required class="form-control" id="id_dob" />
+						<span class="input-group-addon">
+	                        <span class="glyphicon glyphicon-calendar"></span>
+	                    </span>
+	                </div>
+	            </div>
+	            <input type="submit" value='{% if request.resolver_match.url_name == "appointment_book" %}Create{% else %}Update{% endif %}' class="btn btn-default" />
+	        </div>
+	    </div>
+
+  	</div>
+</form>
+{% endblock %}
+
+{% block js_content %}
+	<script type="text/javascript">
+{#    	$(function () {#}
+{#    		var date = new Date();#}
+{#			date.setDate(date.getDate());#}
+
+        	// $('#datetimepicker1').datetimepicker({
+        	// 	minDate: date,
+        	// 	format : 'YYYY-MM-DD HH:mm:ss',
+        	// 	disabledDates: [
+
+         //        ]
+        	// });
+{#        	$('#input_doctor').change(function(){#}
+{##}
+{#        		$.ajax({#}
+{#			        type: "GET",#}
+{#			        url: '/api/doctor/appointment/?doctor='+$('#input_doctor').val(),#}
+{#			        dataType: "json",#}
+{#			        headers: {#}
+{#			            "content-type": "application/json",#}
+{#			            "Authorization": "Token {{ user.token }}",#}
+{#			        },#}
+{#			        success: function (res) {#}
+{#		        		$('#datetimepicker1').datetimepicker({#}
+{#		        			minDate: date,#}
+{#		        			format : 'YYYY-MM-DD HH:mm:ss',#}
+{#			        		disabledDates: res,#}
+{#			            });#}
+{#        			}#}
+{#        		});#}
+{##}
+{#    		});#}
+{#    	});#}
+
+            $(function () {
+                var date = new Date();
+			date.setDate(date.getDate());
+
+                $('#datetimepicker1').datetimepicker({
+                 format: 'YYYY-MM-DD HH:mm:ss',
+                    minDate: date,
+           		});
+            });
+
+
+    </script>
+{% endblock%}

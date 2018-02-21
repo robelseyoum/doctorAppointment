@@ -1,0 +1,114 @@
+{% extends 'home.html' %}
+{% load staticfiles %}
+{#{% load widget_tweaks %}#}
+{% block content %}
+  {{ block.super }}
+
+<div class="container">
+  <h2>Doctor Lists</h2>
+  <table class="table table-striped">
+  {% if doctor_list %}
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Gender</th>
+        <th>Address</th>
+        <th>Phone</th>
+        <th>Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for doctor in doctor_list %}
+        <tr>
+          <td>{{doctor.first_name}}</td>
+          <td>{{doctor.last_name}}</td>
+          <td>{{doctor.sex}}</td>
+          <td>{{doctor.doctor_address}}</td>
+          <td>{{doctor.doctor_phone_number}}</td>
+          <td> <input onclick="return delete_doctor({{ doctor.doctor_id }});" type="button" value="Delete" class="btn btn-default btn-danger" /></td>
+        </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+    {% else %}
+      <p>There are no Doctor available .</p>
+    {% endif %}       
+</div>
+
+
+
+
+
+
+
+
+
+<script type="text/javascript">
+function getCookie(name) {
+          var cookieValue = null;
+          if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+               var cookie = jQuery.trim(cookies[i]);
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) == (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+             }
+          }
+      }
+ return cookieValue;
+}
+
+
+
+function delete_doctor(doctor_id)
+    {
+var csrftoken = getCookie('csrftoken');
+var answer = confirm('Are you sure to delete Doctor? (All related Appoinment and Treatment Details will be Removed.)');
+
+        if(answer) {
+            $.ajax({
+                url: "/base/delete_doctor/",
+                type: "POST",
+                data:
+                    {
+                        doctor_id: doctor_id,
+                        csrfmiddlewaretoken: csrftoken
+                    },
+                beforeSend: function (xhr, settings) {
+
+                },
+                error: function (xhr, errmsg, err) {
+
+                },
+                success: function (data) {
+                    if (data == 1) {
+
+                        alert("Succeessfully Deleted.")
+                window.location.reload();
+
+                    }
+
+                    else {
+                        alert('Unknown Error.Please Check Database connection.Or contact administration');
+                    }
+
+                }
+
+            });
+        }
+
+
+
+    }
+
+
+
+</script>
+
+
+{% endblock %}
+<!-- onclick="window.location='{% url "profile" patient.user.id %}';" -->

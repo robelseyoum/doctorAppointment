@@ -1,0 +1,40 @@
+{% extends 'home.html' %}
+{% load staticfiles %}
+{#{% load widget_tweaks %}#}
+{% block content %}
+  {{ block.super }}
+
+<div class="container">
+  <h2>List Patient</h2>
+  <table class="table table-striped">
+  {% if patient_list %}
+    <thead>
+      <tr>
+        <th>Firstname</th>
+        <th>Lastname</th>
+        <th>Gender</th>
+        <th>Address</th>
+        <th>Birthday</th>
+        <th>Phone</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for patient in patient_list %}
+        <tr>
+          <td>{{patient.first_name}}</td>
+          <td>{{patient.last_name}}</td>
+          <td>{{patient.sex}}</td>
+          <td>{{patient.patient_address}}</td>
+          <td>{{patient.dob}}</td>
+          <td>{{patient.patient_phone_number}}</td>
+        </tr>
+      {% endfor %}
+
+    </tbody>
+  </table>
+    {% else %}
+      <p>There are no patient .</p>
+    {% endif %}       
+</div>
+{% endblock %}
+<!-- onclick="window.location='{% url "profile" patient.user.id %}';" -->

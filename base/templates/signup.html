@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+	<h2>Sign up for a free account</h2>
+
+	<form method="post">
+		{% csrf_token %}
+			<p style="color: red">{{ error_message}}</p>
+		<div class="row">
+			<div class="col-lg-4">
+				<div class="form-group">
+					<label for="id_username">Username:</label><br>
+					<input type="text" name="username" class="form-control" autofocus required id="id_username" maxlength="150" />
+				</div>
+
+				<div class="form-group">
+					<label for="id_first_name">First name:</label><br>
+					<input type="text" name="first_name" class="form-control" required id="id_first_name" maxlength="30" />
+				</div>
+
+
+
+				<div class="form-group">
+					<label for="id_email">Email:</label><br>
+					<input type="email" name="email" class="form-control" required id="id_email" maxlength="254" />
+				</div>
+
+				<div class="form-group">
+					<label for="id_password1">Password:</label><br>
+					<input type="password" name="password1" class="form-control" required id="id_password1" />
+				</div>
+				<div class="form-group">
+					<label for="id_dob">Date of birth:</label><br>
+					<div class='input-group date' id='datetimepicker1'>
+						<input type="text" name="dob" required class="form-control" id="id_dob" />
+						<span class="input-group-addon">
+	                        <span class="glyphicon glyphicon-calendar"></span>
+	                    </span>
+	                </div>
+				</div>
+			</div>
+			<div class="col-lg-4">
+				<div class="form-group">
+					<label for="id_sex">Sex:</label><br>
+					<select name="sex" id="id_sex" class="form-control">
+						<option value="0">Female</option>
+						<option value="1" selected>Male</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="id_last_name">Last name:</label><br>
+					<input type="text" name="last_name" class="form-control" required id="id_last_name" maxlength="30" />
+				</div>
+				<div class="form-group">
+					<label for="id_phone">Phone:</label><br>
+					<input type="text" name="phone" class="form-control" id="id_phone" maxlength="250" />
+				</div>
+				<div class="form-group">
+					<label for="id_password2">Password confirmation:</label><br>
+					<input type="password" name="password2" class="form-control" required id="id_password2" />
+				</div>
+				<div class="form-group">
+					<label for="id_address">Address:</label><br>
+					<input type="text" name="address" id="id_address" class="form-control" maxlength="250" />
+				</div>
+			</div>
+		</div>
+			<select name="role" id="id_role" >
+			  <option value="1" selected="selected" >Patient</option>
+			  <option value="2">Doctor</option>
+			</select>
+		<button type="submit" class="btn btn-success">Sign up</button>
+	</form>
+
+
+{% endblock %}
+
+{% block js_content %}
+<script type="text/javascript">
+            $(function () {
+                $('#datetimepicker1').datetimepicker({
+                 format: 'YYYY/MM/DD'
+           		});
+            });
+        </script>
+{% endblock %}

@@ -1,0 +1,35 @@
+{% extends 'home.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{{ block.super}}
+    {% if treatment_data %}
+{% for treatment in treatment_data %}
+<div class="alert  alert-info " role="alert"><b>Appointment id:</b> {{ treatment.appointment_id }}<br>
+	<b>Patient :</b> {{ treatment.patient_name}}<br><br>
+
+
+    <b>Treatment For :</b> {{ treatment.treatment_for}}<br>
+
+
+
+	<b>Treatment: </b>{{ treatment.treatment }}<br>
+    <b>Notes:</b> {{ treatment.notes }}<br><br>
+<b>Treatment date:</b> {{ treatment.treatment_date }} ***
+
+
+
+	</div> 
+{% endfor %}
+
+
+       {% else %}
+      <b>There are no Treatment history available.</b>
+    {% endif %}
+
+
+
+
+
+
+{% endblock %}

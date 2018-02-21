@@ -1,0 +1,210 @@
+ {% extends 'home.html' %}
+{% load staticfiles %}
+{#{% load widget_tweaks %}#}
+
+{% block content %}
+{{ block.super}}
+
+<style>
+div.gallery {
+    border: 1px solid #ccc;
+}
+
+div.gallery:hover {
+    border: 1px solid #777;
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
+
+div.desc {
+    padding: 15px;
+    text-align: center;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+.responsive {
+    padding: 0 6px;
+    float: left;
+    width: 24.99999%;
+}
+
+@media only screen and (max-width: 700px){
+    .responsive {
+        width: 49.99999%;
+        margin: 6px 0;
+    }
+}
+
+@media only screen and (max-width: 500px){
+    .responsive {
+        width: 100%;
+    }
+}
+
+.clearfix:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+</style>
+
+<h2>Image Gallery</h2>
+<h4>We have the Future.</h4>
+
+<div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="../media/image/5.jpg">
+      <img src="../media/image/5.jpg" alt="Trolltunga Norway" width="600" height="200">
+    </a>
+    <div class="desc">Our Hospital has a large ground.</div>
+  </div>
+</div>
+
+
+<div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="../media/image/6.jpg">
+      <img src="../media/image/6.jpg" alt="Forest" width="600" height="400">
+    </a>
+    <div class="desc">Doctors are Veru much Effective.</div>
+  </div>
+</div>
+
+<div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="../media/image/7.jpg">
+      <img src="../media/image/7.jpg" alt="Northern Lights" width="600" height="400">
+    </a>
+    <div class="desc">We have always group Discussions.</div>
+  </div>
+</div>
+
+<div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="../media/image/8.jpeg">
+      <img src="../media/image/8.jpeg" alt="Mountains" width="600" height="400">
+    </a>
+    <div class="desc">Heighly decorated Room Facility.</div>
+  </div>
+</div>
+
+
+
+<div class="clearfix"></div>
+    <div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="../media/image/8.jpeg">
+      <img src="../media/image/8.jpeg" alt="Trolltunga Norway" width="600" height="200">
+    </a>
+    <div class="desc">We are happy To help patients.</div>
+  </div>
+</div>
+
+
+<div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="../media/image/3.jpg">
+      <img src="../media/image/3.jpg" alt="Forest" width="600" height="400">
+    </a>
+    <div class="desc">We have higher Technology.</div>
+  </div>
+</div>
+
+<div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="../media/image/2.jpg">
+      <img src="../media/image/2.jpg" alt="Northern Lights" width="600" height="400">
+    </a>
+    <div class="desc">Patients room looking Cools here.</div>
+  </div>
+</div>
+
+<div class="responsive">
+  <div class="gallery">
+    <a target="_blank" href="../media/image/1.jp1g">
+      <img src="../media/image/1.jpg" alt="Mountains" width="600" height="400">
+    </a>
+    <div class="desc">It's our dream,hope,future.</div>
+  </div>
+</div>
+
+
+
+<div class="clearfix"></div>
+
+
+
+<div style="padding:6px;">
+    <p></p>
+      In order to meet the rising standards of competition and modernity — as well as governmental standards for some — here are 10 types of health technologies for hospitals and health systems to stay competitive in 2012 and beyond.
+
+1. A certified, efficient EHR system. The one piece of health technology that has received more attention than any other over the past several years is the EHR. It's understandable, since the federal government is providing stimulus payments to hospitals and the ambulatory settings for providers implementing a certified EHR as quickly as possible. Eligible professionals that show meaningful use of an EHR by this year may receive the first of three reimbursement payments totaling $44,000 total through 2014, but those incentive payments will turn into penalty payments as of 2015.
+
+EHRs keep hospitals competitive for many reasons, especially as the healthcare industry places a bigger emphasis on preventive care and population health, says Linda Efferen, MD, chief medical officer at South Nassau Communities Hospital in Oceanside, N.Y. In fact, she thinks EHRs and the related information technologies are the "glue" for the future of healthcare. "[EHRs are] a platform for communication," Dr. Efferen adds. "As a patient moves from one location in the healthcare continuum to another, we have another way to track patient information across the continuum of care."
+
+Bob Hitchcock, MD, emergency department physician at Manatee Memorial Hospital and Lakewood Ranch Medical Center in Bradenton, Fla., adds that hospitals with certified, efficient EHRs are also doing themselves a favor in the recruitment of physicians. From his experience as an ED physician, hospitals that have simple, easy-to-use EHR systems are much more successful in their physician recruitment efforts. "We've seen, in recruitment efforts [of ED physicians], a dramatic increase of enlisting and promoting an EHR system at hospitals," Dr. Hitchcock says. "But it has to be the right EHR. Physicians are becoming very savvy. They will interact with that technology every day with every patient, and technology can be as big of a deterrent as it is an attraction."
+</p><p>
+2. Surgical and service line technologies. When it comes to surgical technologies within a hospital, the administration needs to work in conjunction with its physicians and nurses to determine the best strategy. It may be instinctive to purchase the latest and greatest technologies that hit the market, but surgical equipment has high upfront costs, so it must be properly utilized and have a productive reputation.
+
+Dr. Efferen says surgery, overall, has nearly made the mass-scale shift to minimally invasive procedures, and the technological poster child for those types of surgeries has been the robotic surgical system, such as the da Vinci Surgical System. "Certainly, having the tools to provide top-level care to their patients is what attracts physicians to a given hospital," Dr. Efferen says. "The da Vinci Surgical System is one example. I think it has gained a place where it's essential for hospitals to have. As new graduates come out, they're being trained on it. If that level of sophistication in technology isn't there, they're not in the right positions to provide that standard of care."
+
+Neurosurgery departments have also been at the forefront of new surgical technology as their volumes of cases trend upward. Mitesh Shah, MD, a neurosurgeon with Goodman Campbell Brain and Spine at Indiana University Health Methodist Hospital in Indianapolis, points to the intraoperative MRI scanner as an example.
+
+The intraoperative MRI is unique because it is used during surgery to remove brain tumors. Specifically, the most common types of cases that use this technology are craniotomies for brain tumors, transsphenoidal surgeries of pituitary tumors and placement of deep brain stimulators for Parkinson's disease. "It gives surgeons a lot of confidence and supports their intuition," Dr. Shah says. "It's the sense that, 'I'm able to be more precise.'"
+
+Dr. Shah says IU Health has averaged six specialty cases per month with the technology, but they get the most value out of it by also using it as a regular diagnostic apparatus. "The unit should be utilized as a diagnostic tool so during downtime, it's not just sitting empty," Dr. Shah says. "You must use it continuously so your return-on-investment is reasonable."
+
+Dr. Efferen adds that other service line technologies — such as imaging devices for invasive cardiology procedures and non-invasive oncology platforms — could be considered to give physicians and patients more options for treatment. "It's about allowing physicians to provide choices to their patients in terms of different ways to get the care they need," she says.
+</p><p>
+3. Smartphones, tablets and applications. Over the past several years, the omnipresence of smartphones, tablets and their applications has been one of the biggest cultural shifts in the hospital setting, as well as society at large. They provide a wealth of information for physicians and other clinicians — and all within a fingertip's reach.
+
+"More importantly, we're seeing a variety of applications for these smartphones that will allow physicians more interaction in the patient care experience," Dr. Hitchcock says. There are several popular smartphone and tablet apps for physicians. The iPad, which has almost become a default tablet, has countless popular apps for physicians and executives, ranging from medical calculators and medical Spanish to clinical presentations and actual EHRs.
+
+While some hospitals may not directly provide smartphones and tablets to their physicians and clinical staff, hospitals still have to be aware of them, especially in an age where patient privacy is of utmost importance. Hospitals should make sure that all staff smartphones and tablets have the proper security features; otherwise, they stand as another outlet for data breaches, which could do significant harm to patients and the hospital's reputation.
+</p><p>
+4. Hybrid operating rooms. While hybrid ORs may seem like a newer technology, the concept has actually been around for more than 20 years. In the early 1990s, Juan Parodi, MD, an internationally renowned vascular surgeon in both the United States and Argentina, pioneered the first endovascular abdominal aortic aneurysm procedure, which led to the eventual creation of hybrid ORs. Greg McIff, global director of strategic cardiovascular marketing for GE Healthcare, says hybrid ORs today now allow the best utilization of space and time for hospitals and their surgeons. "The hybrid OR is an environment that enables a surgeon or an interventional specialist to perform catheter-based minimally invasive interventions as well as open surgery," Mr. McIff says. "Initially, hybrid ORs utilized high-end mobile C-arms with vascular imaging capabilities to perform AAA and other complex endovascular procedures. Today, many university and research hospitals have upgraded existing hybrid ORs by replacing the mobile C-arm and installing a fixed C-arm, as procedure growth warranted."
+
+Several hospitals have started to install hybrid ORs over the past couple months — Lourdes Hospital in Paducah, Ky., St. Dominic Hospital in Jackson, Miss., and St. Vincent's Medical Center in Bridgeport, Conn., to name a few — but there are several things a hospital must consider. Firstly, hybrid ORs can potentially cost several million dollars. Not all small community hospitals may be able to invest in a hybrid OR right away. Secondly, a hospital must make sure that before installing a hybrid OR, it will be utilized frequently and will not tie up OR time and space for only one specialty. Lastly, for community hospital just venturing into the hybrid OR space, a mobile hybrid OR solution can be a viable economic option until procedure volumes justify a fixed hybrid OR. "Most hospitals are going to need flexibility and need to be able to manage the space and environment appropriately for what they're doing," Mr. McIff says.
+</p><p>
+5. Telehealth tools. There are several necessary components for a viable telehealth infrastructure. Certainly, there needs to be the right connectivity and support from the government — especially in rural areas — but hospitals have to be willing to take on collaborative telehealth tools of their own, says Steve Nitenson, RN, PhD, senior solutions architect for Perficient and an adjunct professor at Golden Gate University in San Francisco
+
+Bidirectional video feed, cameras, TVs and wireless infrastructure are some of the elements hospitals are adopting to remain competitive in the telehealth realm. The biggest advantage hospitals will gain from telehealth technologies are the ability to help patients immediately while trimming down the costs of an acute-care admission. "Physicians needing to discuss referrals or consultations in real-time want to bring up a Skype-way of communication," Dr. Nitenson says. "Being able to treat patients at home means being able to have collaborative tools in a real-time environment or near real-time."
+
+Healthcare reform is also emphasizing taking care of patients outside of the more costly inpatient environment. Dr. Efferen says these patient-centered medical homes and the associated telehealth strategies should be short- and long-term goals for hospitals. "The goal, increasingly, is to be able to reach into the patient's home in the community and do home visits and some care that we've normally provided in the acute-care hospital setting," Dr. Efferen says.
+</p><p>
+6. Ultrasound imaging devices. Physicians, especially those within the ED, have become more adept at using ultrasound imaging devices over the past 10 years, Dr. Hitchcock says. "We're starting to see hospitals are concerned with what equipment they're using in the ED, like ultrasound," Dr. Hitchcock says. "When I was going through training, we were using what radiology was throwing away. Now, hospitals are realizing they can attract and retain the latest and greatest, and that's important from a physician satisfaction perspective."
+</p><p>
+7. Infection detecting technologies. A high-quality hospital infection control program keeps a hospital competitive on several fronts. First, it keeps the hospital compliant with all regulatory patient safety issues. Second, low rates of infection are able to be publicized to patients to tell them, "You will be safely treated at this hospital." Effective infection control hospital programs also have the right technology to detect if and when there is a problem.
+
+An example of an infection detection technology is the procalcitonin, or PCT, test for a hospital's sepsis program. Assistant Professor of Clinical Medicine in the Department of Emergency Medicine at the University of California, San Diego Medical Center Sean-Xavier Neath, MD, says the PCT test has only been available in the United States within the past three to four years. Essentially, the test is a tool that detects sepsis earlier, therefore avoiding the overutilization of antibiotics.
+
+While there are upfront costs for the PCT test, Dr. Neath says it is cost-effective over the long term because it will allow hospitals to diagnose and manage infections more successfully and reduce the hospital's need to pay for pricey antibiotics. "There are a number of elements to justify implementation of this test in hospital infection control programs," Dr. Neath says. "This [technology] looks at improving patient care with a readily available blood test. More assertive hospitals, forward-thinking hospitals, have been rapid adopters of this."
+</p><p>
+8. Healthcare staffing management technology. Staffing and labor costs can consume more than 50 percent of expenses at most hospitals. In order to keep those costs in check, hospitals can implement staffing management technology to keep scheduling at an optimal state without sacrificing patient care.
+
+Anura deSilva, PhD, CEO of Care Systems, says staffing management systems need to be fused together with an initial assessment of patient staffing so hospitals are not over or understaffed. "Seamlessness between these two broad types of functionalities creates an environment to respond to patient care needs by adjusting staffing without resorting to expensive outside staff or excessive overtime," Dr. deSilva says.
+</p><p>
+9. Social media. Social media technologies such as Facebook, Twitter, CaringBridge, podcasting, wikis, blogs and others are not new (Facebook has already been around for eight years), and the services are all extremely accessible. However, not all hospitals utilize the technology — or at least utilize it in a well-structured manner.
+</p><p>
+If hospitals want to communicate and reach the broadest patient population possible, they should instill a social media plan. The basics of any social media plan include assessing the hospital's readiness, experimenting with the different types of social media technologies and services, establishing a direction, creating dialogue and monitoring analytics to see how a hospital's presence is being received.
+</p><p>
+10. Patient-friendly technologies. At the end of the day, hospital reputation is a major factor with regard to patient volumes. Health IT, surgical technology and the like help to shape the reputation, but how a hospital accommodates its patients directly with technology is just as critical. "Competition for patients in many markets is fierce, so the smart hospital is the one that leverages IT that directly impacts the patient," says Vince Ciotti, a principal at health IT consulting firm H.I.S. Professionals.
+
+  </p>
+</div>
+
+
+
+
+
+
+
+{% endblock %}
+
+

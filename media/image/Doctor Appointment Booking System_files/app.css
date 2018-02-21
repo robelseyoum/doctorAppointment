@@ -1,0 +1,156 @@
+.navbar-brand {
+  font-family: 'Peralta', cursive;
+  color: #e6e8e8;
+  font-size: 3em;
+}
+
+
+.btn-patient:hover,
+.btn-patient:active {
+  color: #fff;
+  background-color: #608993;
+  border-color: #608993;
+}
+
+.btn-patient {
+  color: #fff;
+  background-color: #91afb6;
+  border-color: #91afb6;
+}
+
+
+.btn-doctor {
+  color: #fff;
+  background-color: #8980a5;
+  border-color: #8980a5;
+}
+
+.btn-doctor:hover,
+.btn-doctor:active {
+  color: #fff;
+  background-color: #66598B;
+  border-color: #66598B;
+}
+.btn:hover{
+  cursor: pointer;
+}
+#menu{
+  color: red;
+}
+
+#menu .table .thead-inverse a{
+  color: #fff;
+}
+#menu .active{
+  background-color: #ffc107;
+}
+.form-group select.form-control#id_sex, .form-group select.form-control#id_user-sex {
+  height: 34px!important;
+}
+a:focus, a:hover {
+    color: #f5f5f5;
+    text-decoration: underline;
+}
+
+.btn-outline-secondary {
+    color: #fff;
+    background-color: #337ab7;
+    border-color: #2e6da4;
+}
+
+.thead-inverse th {
+    color: #61a1ad;
+    background-color: #2572805c;
+}
+.thead-inverse th {
+    color: #ffffff;
+    background-color: #2572805c;
+}
+
+a {
+    color: #fafaff;
+    text-decoration: none;
+}
+
+.h4, h4 {
+    font-size: 20px;
+    color: #F5F5F4;
+    font-family: sans-serif;
+}
+
+h3, h3 {
+    font-size: 24px;
+    color: #f5f5f5;
+    font-family: sans-serif;
+}
+
+.table>tbody>tr.active>td, .table>tbody>tr.active>th, .table>tbody>tr>td.active, .table>tbody>tr>th.active, .table>tfoot>tr.active>td, .table>tfoot>tr.active>th, .table>tfoot>tr>td.active, .table>tfoot>tr>th.active, .table>thead>tr.active>td, .table>thead>tr.active>th, .table>thead>tr>td.active, .table>thead>tr>th.active {
+    background-color: #CADEEE;
+}
+
+
+/* footer */
+html {
+  position: relative;
+  min-height: 100%;
+}
+
+body {
+  margin-bottom: 150px;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 120px;
+  background-color: #e6e8e8;
+  text-align: center;
+}
+
+.container{
+  margin-top: 50px;
+  color: #fff;
+  width: 100%;
+}
+
+.fa-twitter {
+    color: #4099FF;
+}
+
+.fa-facebook {
+    color: #3B5998;
+}
+
+.fa-youtube-play {
+    color: #e52d27;
+}
+
+.fa-rss {
+    color: #FF6600;
+}
+
+.fa-vine {
+    color: #00a478;
+}
+
+.fa-flickr {
+    color: #ff0084;
+}
+
+.fa-twitch {
+    color: #6441A5;
+}
+
+
+
+.fa {
+    opacity: 0.7;
+    transition: 1s;
+    -webkit-transition: 1s;
+}
+
+.fa:hover{
+    opacity: 1;
+    transition: 1s;
+    -webkit-transition: 1s;

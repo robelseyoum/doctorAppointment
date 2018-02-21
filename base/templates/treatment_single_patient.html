@@ -1,0 +1,67 @@
+{% extends 'home.html' %}
+{% load staticfiles %}
+{#{% load widget_tweaks %}#}
+
+{% block content %}
+{{ block.super}}
+<div class="feedback">
+<form action="{% url 'base:treatment' appointment.id %}" method="post" id="form">
+    {% csrf_token %}
+    <input type="hidden"name="appointment_id"value="{{ appointment.id }}"/>
+
+    <div class="container">
+	    <div class="row">
+	        <div class=' col-xs-12 col-sm-6 '>
+                <b>Patient :  </b>{{ patient.user.username }}<br>
+               <b>Treatment For :  </b> <input required type="text" name="treatment_for"><br>
+	        	<b>Treatment Details:</b>
+	            <div class="form-group">
+	                <div class='input-group'>
+                        <textarea required placeholder="Please Give treatments here..." rows="4" cols="50" name="treatment" style="width: 100%;height: 200px">
+</textarea>
+	                </div>
+	            </div>
+{#	            <button type="submit" class="btn btn-success" id="create">Submit</button>#}
+	        </div>
+
+
+            	        <div class=' col-xs-12 col-sm-3 '>
+                    <br><br><br>
+	        	<b>Notes:</b>
+	            <div class="form-group">
+	                <div class='input-group'>
+                        <textarea rows="4" cols="50" name="notes" style="width: 100%;height: 200px">
+Any Suggestions...</textarea>
+	                </div>
+	            </div>
+
+	        </div>
+	    </div>
+        <button onclick="alertUpdate()" type="submit" class="btn btn-success" id="create">Submit</button>
+
+  	</div>
+</form>
+</div>
+<br>
+<br>
+<p class="col-lg-offset-1" id="tks" style="display: none;color: #1e7e34">Thanks for your feedback..</p>
+{% endblock %}
+{% block js_content %}
+<script>
+{#	$("#create").click(function($event){#}
+{#		$event.preventDefault();#}
+{#	    $("#tks").show();#}
+{#	    setTimeout(function(){#}
+{#	        $("#tks").hide();#}
+{#	    	$('#form').submit();#}
+{#	    }, 2000);#}
+{#	});#}
+
+
+function alertUpdate() {
+    alert("Updating feedback .!");
+}
+</script>
+{% endblock %}
+
+

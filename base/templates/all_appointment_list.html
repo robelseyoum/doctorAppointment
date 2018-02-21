@@ -1,0 +1,150 @@
+{% extends 'home.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{{ block.super}}
+    {% if appointment_data %}
+
+{% for appointment in appointment_data %}
+
+<div class="alert  alert-info " role="alert">
+    {% if appointment.is_notified == 0 %}
+<input class="btn btn-default pull-right btn-info" onclick="return send_notification({{ appointment.appointment_id }});" type="button" value="Send Notification" />
+{% else %}
+<input class="btn btn-default pull-right btn-success"  type="button" value="Notified" />
+{% endif %}
+    Appointment id: {{ appointment.appointment_id }}<br>
+	<MARQUEE style="color: red"> {{ appointment.alert_message }}</MARQUEE><br>
+    Creation date: {{ appointment.creation_date }} ***
+	Last change: {{ appointment.last_change }}<br><br>
+
+		Doctor: {{ appointment.doctor_name}}<br>
+
+
+<input onclick="return delete_appointment({{ appointment.appointment_id }});" class="btn btn-default pull-right btn-danger"  type="button" value="Delete" />
+    Appointment date: {{ appointment.appointment_date}}
+	</div> 
+{% endfor %}
+
+
+       {% else %}
+      <b>There are no Appointment available.</b>
+    {% endif %}
+
+
+
+
+
+<script type="text/javascript">
+function getCookie(name) {
+          var cookieValue = null;
+          if (document.cookie && document.cookie != '') {
+                var cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+               var cookie = jQuery.trim(cookies[i]);
+          // Does this cookie string begin with the name we want?
+          if (cookie.substring(0, name.length + 1) == (name + '=')) {
+            cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+              break;
+             }
+          }
+      }
+ return cookieValue;
+}
+
+
+
+function send_notification(appointment_id)
+    {
+var csrftoken = getCookie('csrftoken');
+var answer = confirm('Are you sure to send an Email to user?');
+
+        if(answer) {
+            $.ajax({
+                url: "/base/send_notification/",
+                type: "POST",
+                data:
+                    {
+                        appointment_id: appointment_id,
+                        csrfmiddlewaretoken: csrftoken
+                    },
+                beforeSend: function (xhr, settings) {
+
+                },
+                error: function (xhr, errmsg, err) {
+
+                },
+                success: function (data) {
+                    if (data == 1) {
+
+                        alert("Email Send Successfully.")
+                window.location.reload();
+
+                    }
+
+                    else {
+                        alert('Unknown Error.Please Check Database connection.Or contact administration');
+                    }
+
+                }
+
+            });
+        }
+
+
+
+    }
+
+
+
+
+
+
+function delete_appointment(appointment_id)
+    {
+var csrftoken = getCookie('csrftoken');
+var answer = confirm('Are you sure to delete Appointment?');
+
+        if(answer) {
+            $.ajax({
+                url: "/base/delete_appointment/",
+                type: "POST",
+                data:
+                    {
+                        appointment_id: appointment_id,
+                        csrfmiddlewaretoken: csrftoken
+                    },
+                beforeSend: function (xhr, settings) {
+
+                },
+                error: function (xhr, errmsg, err) {
+
+                },
+                success: function (data) {
+                    if (data == 1) {
+
+                        alert("Appointment Deleted.")
+                window.location.reload();
+
+                    }
+
+                    else {
+                        alert('Unknown Error.Please Check Database connection.Or contact administration');
+                    }
+
+                }
+
+            });
+        }
+
+
+
+    }
+
+
+
+</script>
+
+
+
+{% endblock %}

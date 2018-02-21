@@ -1,0 +1,29 @@
+{% extends 'home.html' %}
+{% load staticfiles %}
+
+{% block content %}
+{{ block.super}}
+    {% if feedback_data %}
+
+{% for feedback in feedback_data %}
+<div class="alert  alert-info " role="alert"><b>Patient id: </b>{{ feedback.patient_id }}<br><br>
+	<b>Creation date:</b> {{ feedback.creation_date }} ***
+	<b>Patient Name: </b>{{ feedback.patient_name }}<br><br>
+
+		<b>Feedback Deatils:</b> {{ feedback.feedback}}
+
+
+	</div> 
+{% endfor %}
+
+
+       {% else %}
+      <b>There are no Feedback available.</b>
+    {% endif %}
+
+
+
+
+
+
+{% endblock %}

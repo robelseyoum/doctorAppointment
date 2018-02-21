@@ -1,0 +1,12 @@
+{% extends 'home.html' %}
+
+{% block content %}
+{{ block.super}}
+<div class="alert alert-info" role="alert">Appointment id: {{ appointment.id }}<br><br>
+Creation date:{{ appointment.creation_date }}
+Last change:{{ appointment.last_change }}<br>
+Doctor:{{ appointment.doctor}}
+Appointment date:{{ appointment.appointment}}
+</div>
+
+{% endblock %}
