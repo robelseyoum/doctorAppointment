@@ -172,3 +172,9 @@ body {
 .jumbotron .h1, .jumbotron h1 {
     color: black;
 }
+
+button, input, optgroup, select, textarea {
+    margin: 0;
+    font: inherit;
+    color: black;
+}

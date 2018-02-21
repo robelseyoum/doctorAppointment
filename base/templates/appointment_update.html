@@ -12,7 +12,7 @@
 	        	<b>Select Doctor:</b>
 	            <div class="form-group">
 	                <div class='input-group'>
-	                    <select name="doctor_user_id" style="width: 350px" required>
+	                    <select style="color:gray" name="doctor_user_id" style="width: 350px" required>
 
                  {% for doctor in doctorList %}
                       <option {% if previous_appoinment_data.doctor_id == doctor.doctor_id %}selected{% endif %} value="{{ doctor.id }}">{{ doctor.username }}( {{ doctor.category_name }} )</option>

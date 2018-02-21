@@ -68,9 +68,19 @@
 				</div>
 			</div>
 		</div>
-			<select name="role" id="id_role" >
+			<select style="color:gray"  name="role" id="id_role" >
 			  <option value="1" selected="selected" >Patient</option>
-			  <option value="2">Doctor</option>
+			  <option id="doc" value="2">Doctor</option>
+			</select>
+        <select style="color:gray" name="category" id="id_category" style="display: None" >
+			  <option value="1" selected="selected" >PSYCHIATRIS</option>
+			  <option value="2">ALLERGIST</option>
+			  <option value="3">PEDIATRICIAN</option>
+			  <option value="4">CARDIOLOGIST</option>
+			  <option value="5">ADDICTION-PSYCHIATRIST</option>
+			  <option value="6">PSYCHOLOGIST</option>
+			  <option value="7">ACUPUNCTURIST</option>
+
 			</select>
 		<button type="submit" class="btn btn-success">Sign up</button>
 	</form>
@@ -85,5 +95,20 @@
                  format: 'YYYY/MM/DD'
            		});
             });
+
+
+    $('select').change(function() {
+            {#alert($(this).val());#}
+        if($(this).val()==2){
+            $('#id_category').show();
+        }
+           if($(this).val()==1){
+            $('#id_category').hide();
+        }
+
+      });
+
+
+
         </script>
 {% endblock %}

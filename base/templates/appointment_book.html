@@ -12,7 +12,7 @@
 	        	<b>Select Doctor:</b>
 	            <div class="form-group">
 	                <div class='input-group'>
-	                    <select name="doctor_id" style="width: 350px" required>
+	                    <select  style="color:gray" name="doctor_id" style="width: 350px" required>
               <option value="">Please Select a doctor....</option>
                  {% for doctor in doctorList %}
                       <option value="{{ doctor.id }}">{{ doctor.username }}( {{ doctor.category_name }} )</option>

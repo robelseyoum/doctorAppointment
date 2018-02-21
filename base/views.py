@@ -87,6 +87,7 @@ def registration(request):
         phone = request.POST.get('phone',"")
         address = request.POST.get('address',"")
         role = request.POST.get('role',"")
+        category = request.POST.get('category',"")
 
 
         date_object = datetime.datetime.strptime(dob, '%Y/%m/%d')
@@ -119,8 +120,8 @@ def registration(request):
             user.is_active = True
             user.save()
 
-            #role=3
-            #user.is_superuser = True
+            # role=3
+            # user.is_superuser = True
 
             profile=Profile(user_id=user.pk,
                             is_admin=False,
@@ -137,7 +138,7 @@ def registration(request):
                 patient=Patient(user_id=user.pk)
                 patient.save()
             if role=='2':
-                doctor=Doctor(user_id=user.pk,category_id=1)
+                doctor=Doctor(user_id=user.pk,category_id=category)
                 doctor.save()
 
 
