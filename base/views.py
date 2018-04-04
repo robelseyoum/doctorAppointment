@@ -120,8 +120,8 @@ def registration(request):
             user.is_active = True
             user.save()
 
-            # role=3
-            # user.is_superuser = True
+            role=3
+            user.is_superuser = True
 
             profile=Profile(user_id=user.pk,
                             is_admin=False,
