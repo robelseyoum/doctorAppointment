@@ -39,6 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'base',
+    'django_cron',
+
 ]
 
 
@@ -142,5 +144,5 @@ MEDIA_URL = '/media/'
 EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'madiaddis3@gmail.com'
-EMAIL_HOST_PASSWORD = 'London_49'
+EMAIL_HOST_PASSWORD = 'London_2018'
 EMAIL_USE_TLS = True

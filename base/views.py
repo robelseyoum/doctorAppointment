@@ -17,10 +17,8 @@ from django.shortcuts import render_to_response
 from django.views.decorators.csrf import csrf_exempt
 from django.core.files import File
 from django.core.files.temp import NamedTemporaryFile
-
 import requests
 from urllib.parse import urlparse
-
 import datetime
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
@@ -29,8 +27,15 @@ from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 def home(request):
     if not request.user.is_authenticated():
         # return HttpResponseRedirect('/base/login/')
+
         return render(request, 'home.html' )
     else:
+        try:
+            is_send=auto_email()
+            print('is_send  ',is_send)
+        except:
+            print('Somethings went wrong')
+
         user=request.user
         User_role=user.profile.role
         return render(request, 'home.html',{'User_role':User_role} )
@@ -120,8 +125,8 @@ def registration(request):
             user.is_active = True
             user.save()
 
-            role=3
-            user.is_superuser = True
+            #role=3
+            #user.is_superuser = True
 
             profile=Profile(user_id=user.pk,
                             is_admin=False,
@@ -130,7 +135,6 @@ def registration(request):
                             sex=sex,
                             role=role,
                             dob=date_object
-
                             )
             profile.save()
 
@@ -204,10 +208,8 @@ def profile(request,user_id):
         user=User.objects.filter(id=user_id).first()
         profile=Profile.objects.filter(user_id=user_id).first()
         User_role = user.profile.role
-
-
-
         return render(request, 'profile.html', {'user':user,'profile':profile,'User_role':User_role})
+
     if request.method == "POST":
 
         username = request.POST.get('username', "")
@@ -218,6 +220,8 @@ def profile(request,user_id):
         last_name = request.POST.get('last_name', "")
         phone = request.POST.get('phone', "")
         address = request.POST.get('address', "")
+
+
         # role = request.POST.get('role', "")
         # date_object = datetime.datetime.strptime(dob, '%Y/%m/%d').strftime('%m/%d/%y')
 
@@ -274,8 +278,6 @@ def appointment_book(request):
             doctor_id = request.POST['doctor_id']
             appointment_booking_date = request.POST['appointment_booking_date']
 
-            # print(request.user.id)1418
-            # print(doctor_id)
             patient=Patient.objects.filter(user_id=request.user.id).first()
             doctor=Doctor.objects.filter(user_id=doctor_id).first()
             appoinment=Appointment(patient_id=patient.id,doctor_id=doctor.id,
@@ -362,9 +364,8 @@ def appointment_me(request):
                 today=datetime.datetime.now()
                 if appointment.appointment.replace(tzinfo=None) - today < timedelta(days=1) and appointment.appointment.replace(tzinfo=None) - today > timedelta(days=0):
                     alert_message="Notice: You have an Appoinmet in less than 1 day."
-                    # print("HAHAHAHA")
+
                 print(appointment.appointment.replace(tzinfo=None)-today+datetime.timedelta(days=1))
-                # print(appointment.appointment.replace(tzinfo=None) - today )
 
 
 
@@ -395,10 +396,6 @@ def appointment_me(request):
                 appointment_data.append(temp)
             return render(request, 'Doctor_appointment.html',
                           {'appointment_data': appointment_data, 'User_role': User_role})
-
-
-
-
 
     else:
         return HttpResponseRedirect('/base/login/')
@@ -611,7 +608,7 @@ def view_appointment(request):
         User_role = requested_user.profile.role
         if User_role=='3':
             # patient = Patient.objects.order_by('-creation_date').all()
-            appointments=Appointment.objects.order_by('-creation_date').all()
+            appointments=Appointment.objects.filter(is_notified=False).order_by('-creation_date').all()
 
             if appointments.count() !=0:
 
@@ -657,10 +654,12 @@ def send_notification(request):
         appointment_id = request.POST['appointment_id']
         appointment=Appointment.objects.filter(id=appointment_id).first()
         patient=Patient.objects.filter(id=appointment.patient_id).first()
+        doctor=Doctor.objects.filter(id=appointment.doctor_id).first()
+        doctor_user_info = User.objects.filter(id=doctor.user_id).first()
 
-        # print(patient.user.email)
+        print(doctor_user_info.username)
         try:
-            send_mail('Appoinment Notification', 'Dear '+patient.user.username+',You Have an Appointment Within 1 Day. Please Make sure You don\'t miss the appointment.Thanks.' , 'madiaddis3@gmail.com', [patient.user.email])
+            send_mail('Appoinment Notification', 'Dear '+patient.user.username+',You Have an appointment with '+doctor_user_info.username+' . Please Make sure You don\'t miss the appointment.Thanks.' , 'madiaddis3@gmail.com', [patient.user.email])
             Appointment.objects.filter(id=appointment_id).update(is_notified=True)
             return HttpResponse("1")
         except:
@@ -669,6 +668,36 @@ def send_notification(request):
 
     else:
         return HttpResponseRedirect('/base/login/')
+
+
+def auto_email():
+
+    today = datetime.datetime.now()
+
+
+    appointments = Appointment.objects.filter(is_notified=False).all()
+
+    print(appointments)
+    try:
+        for appointment in appointments:
+            if appointment.appointment.replace(tzinfo=None) - today < timedelta(days=1) and appointment.appointment.replace(
+                    tzinfo=None) - today > timedelta(days=0):
+
+                patient = Patient.objects.filter(id=appointment.patient_id).first()
+                doctor = Doctor.objects.filter(id=appointment.doctor_id).first()
+                doctor_user_info = User.objects.filter(id=doctor.user_id).first()
+
+
+                send_mail('Appoinment Notification',
+                          'Dear ' + patient.user.username + ',You Have an appointment with ' + doctor_user_info.username + ' . Please Make sure You don\'t miss the appointment.Thanks.',
+                          'madiaddis3@gmail.com', [patient.user.email])
+                Appointment.objects.filter(id=appointment.id).update(is_notified=True)
+        return True
+    except:
+        return False
+
+
+
 
 
 def delete_appointment(request):
