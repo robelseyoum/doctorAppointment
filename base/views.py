@@ -23,10 +23,10 @@ import datetime
 from django.contrib.auth.models import User
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 
-
+#A method used for home page of the web app
 def home(request):
     if not request.user.is_authenticated():
-        # return HttpResponseRedirect('/base/login/')
+
 
         return render(request, 'home.html' )
     else:
@@ -40,6 +40,7 @@ def home(request):
         User_role=user.profile.role
         return render(request, 'home.html',{'User_role':User_role} )
 
+#gallery used to display the healthcentre Facility
 def gallery(request):
     if not request.user.is_authenticated():
         # return HttpResponseRedirect('/base/login/')
@@ -49,6 +50,7 @@ def gallery(request):
         User_role=user.profile.role
         return render(request, 'gallery.html',{'User_role':User_role} )
 
+#Staff used to display
 def our_staff(request):
     if not request.user.is_authenticated():
         # return HttpResponseRedirect('/base/login/')
@@ -57,6 +59,8 @@ def our_staff(request):
         user=request.user
         User_role=user.profile.role
         return render(request, 'our_staff.html',{'User_role':User_role} )
+
+
 def about_us(request):
     if not request.user.is_authenticated():
         # return HttpResponseRedirect('/base/login/')
@@ -75,9 +79,9 @@ def contact_us(request):
         User_role=user.profile.role
         return render(request, 'contact_us.html',{'User_role':User_role} )
 
-
+#Here registration is used for registration of different users
 def registration(request):
-    # registration module
+
     if request.user.is_authenticated():
         return HttpResponseRedirect('/base/home/')
 
@@ -106,7 +110,7 @@ def registration(request):
 
 
 
-        # checking existing email.
+        #Here used to check if there is an existing email
         existing_email = User.objects.filter(email=email).first()
         if existing_email is not None:
             message = '"' + email + '" already exist. Please try with a different email.'
@@ -124,7 +128,7 @@ def registration(request):
             user.is_superuser = False
             user.is_active = True
             user.save()
-
+            #role and user.is_superuser only activated when admin is created.
             #role=3
             #user.is_superuser = True
 
@@ -159,6 +163,7 @@ def registration(request):
     else:
         return render(request, 'signup.html')
 
+#login funtion for authenticate useres
 def login(request):
     if request.user.is_authenticated():
         return HttpResponseRedirect('/base/home/')
@@ -169,18 +174,18 @@ def login(request):
         loginStatus = request.user.is_authenticated
 
         user = None
-        # print(loginStatus)
+
 
         if request.method == 'POST':
             uname = request.POST['username']
-            # uemail = request.POST['email']
+
             pword = request.POST['password']
             user = authenticate(username=uname, password=pword)
 
             if user is not None:
                 if user.is_active:
                     login(request, user)
-                    # return HttpResponseRedirect('/base/begin/')
+
                     return HttpResponseRedirect('/base/home/')
                 else:
                     return render(request, 'login.html', {'message': "It's not active user"})
@@ -194,6 +199,8 @@ def login(request):
             else:
                 return render(request, 'login.html', {'message':''})
     return render(request, 'base/login.html', {'message': "Invalid User name Or Password"})
+
+#Logout is used to login users
 def logout(request):
     if request.user.is_authenticated():
         from django.contrib.auth import logout
@@ -203,6 +210,7 @@ def logout(request):
         return HttpResponseRedirect('/base/login')
 
 
+#profile is used to show the details of each users
 def profile(request,user_id):
     if request.method == "GET":
         user=User.objects.filter(id=user_id).first()
@@ -222,21 +230,6 @@ def profile(request,user_id):
         address = request.POST.get('address', "")
 
 
-        # role = request.POST.get('role', "")
-        # date_object = datetime.datetime.strptime(dob, '%Y/%m/%d').strftime('%m/%d/%y')
-
-        # profile = Profile.objects.filter(user_id=user_id).first()
-        #
-        # print(profile.dob)
-        # print(datetime.datetime.strptime(dob, '%b. %d, %Y').strftime('%Y-%m-%d'))
-        #
-        # if profile.dob != datetime.datetime.strptime(dob, '%b. %d, %Y').strftime('%Y-%m-%d'):
-        #     dob =datetime.datetime.strptime(dob, '%b. %d, %Y').strftime('%Y-%m-%d')
-        #     print("date changed")
-        #     print(dob)
-
-
-
         user_updated=User.objects.filter(id=user_id).update(username=username,first_name=first_name,
                                                     email=email,
                                                     last_name=last_name
@@ -250,6 +243,7 @@ def profile(request,user_id):
 
         return render(request, 'profile.html', {'user':user,'profile':profile,'User_role':User_role})
 
+#appointment booking function is used to book the selected doctor with prefered time.
 def appointment_book(request):
     if request.user.is_authenticated():
         if request.method=='GET':
@@ -292,7 +286,7 @@ def appointment_book(request):
         return HttpResponseRedirect('/base/login/')
 
 
-
+#here appoinment booking update is used to reschule
 def appointment_update(request):
     if request.user.is_authenticated():
         requested_user=request.user
@@ -337,7 +331,7 @@ def appointment_update(request):
 
 
 
-
+#appointment me is used to show the list of appoinment made for each patients for a doctor
 def appointment_me(request):
     if request.user.is_authenticated():
         requested_user=request.user
@@ -400,7 +394,7 @@ def appointment_me(request):
     else:
         return HttpResponseRedirect('/base/login/')
 
-
+#Feedback is used to allow patient to write review about the website
 def feedback(request):
     if request.user.is_authenticated():
         requested_user = request.user
@@ -419,7 +413,7 @@ def feedback(request):
     else:
         return HttpResponseRedirect('/base/login/')
 
-
+#treatment is used for a doctor to write a note about the treatment
 def treatment(request,appointment_id):
 
     if request.user.is_authenticated():
@@ -448,15 +442,12 @@ def treatment(request,appointment_id):
                                 )
             treatment.save()
             return HttpResponseRedirect('/base/treatment_details/')
-            # return render(request, 'treatment_single_patient.html', {'User_role': User_role,
-            #                                                          'appointment': appointment,
-            #                                                          'patient': patient})
 
     else:
         return HttpResponseRedirect('/base/login/')
 
 
-
+#Here patient function is used to list the patient lists
 def patients(request):
     if request.user.is_authenticated():
         requested_user = request.user
@@ -472,8 +463,7 @@ def patients(request):
             temp = {}
             temp["first_name"] = patient.user.first_name
             temp["last_name"] = patient.user.last_name
-            # temp["last_change"] = appointment.last_change
-            # temp["sex"] = profile.sex
+
             if profile.sex=='0':
                 temp["sex"] = "Female"
             elif profile.sex=='1':
@@ -481,33 +471,23 @@ def patients(request):
             if profile.sex=='2':
                 temp["sex"] = "Both"
 
-
-
-
             temp["dob"] = profile.dob
             temp["patient_address"] = profile.address
             temp["patient_phone_number"] = profile.phone
 
             patient_list.append(temp)
 
-
-        # patient_list=Patient.objects.filter(id__in=patients_id).all()
-
         return render(request, 'patients.html', {'patient_list': patient_list,'User_role':User_role })
-
-
 
     else:
         return HttpResponseRedirect('/base/login/')
 
-
+#Here view doctor funtion is used to show the list of the doctor
 def view_doctor(request):
     if request.user.is_authenticated():
         requested_user = request.user
         User_role = requested_user.profile.role
         doctors = Doctor.objects.all()
-
-
         doctor_list = []
         for doctor in doctors:
             doctor_profile = Profile.objects.filter(user_id=doctor.user_id).first()
@@ -535,7 +515,7 @@ def view_doctor(request):
         return HttpResponseRedirect('/base/login/')
 
 
-
+#Delete doctor function is used to delete users
 def delete_doctor(request):
     if request.user.is_authenticated():
         doctor_id = request.POST['doctor_id']
@@ -543,7 +523,6 @@ def delete_doctor(request):
         treatment=Treatment.objects.filter(doctor_id=doctor_id).delete()
 
         doctor_info=Doctor.objects.filter(id=doctor_id).first()
-
 
         isDoctorProfileDeleted = Profile.objects.filter(user_id=doctor_info.user_id).delete()
         isDoctorUserDeleted = User.objects.filter(id=doctor_info.user_id).delete()
@@ -558,8 +537,7 @@ def delete_doctor(request):
 
 
 
-
-
+#Here view doctor funtion is used to show the list of the doctor
 def view_customer(request):
     if request.user.is_authenticated():
         requested_user = request.user
@@ -574,8 +552,7 @@ def view_customer(request):
             temp = {}
             temp["first_name"] = patient.user.first_name
             temp["last_name"] = patient.user.last_name
-            # temp["last_change"] = appointment.last_change
-            # temp["sex"] = profile.sex
+
             if profile.sex=='0':
                 temp["sex"] = "Female"
             elif profile.sex=='1':
@@ -583,31 +560,24 @@ def view_customer(request):
             if profile.sex=='2':
                 temp["sex"] = "Both"
 
-
-
-
             temp["dob"] = profile.dob
             temp["patient_address"] = profile.address
             temp["patient_phone_number"] = profile.phone
 
             patient_list.append(temp)
 
-
-        # patient_list=Patient.objects.filter(id__in=patients_id).all()
-
         return render(request, 'patients.html', {'patient_list': patient_list,'User_role':User_role })
-
-
 
     else:
         return HttpResponseRedirect('/base/login/')
 
+
+#Here view appoinment funtion is used to list the list of appoinments
 def view_appointment(request):
     if request.user.is_authenticated():
         requested_user=request.user
         User_role = requested_user.profile.role
         if User_role=='3':
-            # patient = Patient.objects.order_by('-creation_date').all()
             appointments=Appointment.objects.filter(is_notified=False).order_by('-creation_date').all()
 
             if appointments.count() !=0:
@@ -647,7 +617,7 @@ def view_appointment(request):
     else:
         return HttpResponseRedirect('/base/login/')
 
-
+#here send_mail library is imported for the purpuse of sending email for the patient as Notification manually
 from django.core.mail import send_mail
 def send_notification(request):
     if request.user.is_authenticated():
@@ -659,7 +629,7 @@ def send_notification(request):
 
         print(doctor_user_info.username)
         try:
-            send_mail('Appoinment Notification', 'Dear '+patient.user.username+',You Have an appointment with '+doctor_user_info.username+' . Please Make sure You don\'t miss the appointment.Thanks.' , 'madiaddis3@gmail.com', [patient.user.email])
+            send_mail('Appoinment Notification', 'Dear '+patient.user.username+',You Have an appointment with '+doctor_user_info.username+' . Please Make sure You don\'t miss the appointment.Thanks.' , 'doctorappointbooking3@gmail.com', [patient.user.email])
             Appointment.objects.filter(id=appointment_id).update(is_notified=True)
             return HttpResponse("1")
         except:
@@ -669,14 +639,11 @@ def send_notification(request):
     else:
         return HttpResponseRedirect('/base/login/')
 
-
+#Here auto_email funtion used to send emal automatically
 def auto_email():
 
     today = datetime.datetime.now()
-
-
     appointments = Appointment.objects.filter(is_notified=False).all()
-
     print(appointments)
     try:
         for appointment in appointments:
@@ -690,7 +657,7 @@ def auto_email():
 
                 send_mail('Appoinment Notification',
                           'Dear ' + patient.user.username + ',You Have an appointment with ' + doctor_user_info.username + ' . Please Make sure You don\'t miss the appointment.Thanks.',
-                          'madiaddis3@gmail.com', [patient.user.email])
+                          'doctorappointbooking3@gmail.com', [patient.user.email])
                 Appointment.objects.filter(id=appointment.id).update(is_notified=True)
         return True
     except:
@@ -699,19 +666,15 @@ def auto_email():
 
 
 
-
+#Delete appoinment function is used to delete an appoinment
 def delete_appointment(request):
     if request.user.is_authenticated():
         appointment_id = request.POST['appointment_id']
-
-
         try:
             appointment = Appointment.objects.filter(id=appointment_id).delete()
             return HttpResponse("1")
         except:
             return HttpResponse("0")
-
-
     else:
         return HttpResponseRedirect('/base/login/')
 
@@ -760,7 +723,7 @@ def view_feedback(request):
 
 
 
-
+#Here treatment details function is used to list the treatmetn history of patients
 def treatment_details(request):
     if request.user.is_authenticated():
         requested_user = request.user
